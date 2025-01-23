@@ -23,7 +23,6 @@
             const touch = event.touches[0];
             const rect = canvas.getBoundingClientRect();
             const x = touch.clientX - rect.left;
-            const y = touch.clientY - rect.top;
 
             // 根据触摸位置判断旋转方向
             if (x < canvas.width / 2) {
