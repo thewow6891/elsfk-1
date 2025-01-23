@@ -16,5 +16,22 @@
         <canvas id="tetris-canvas"></canvas>
     </div>
     <script src="script.js"></script>
+    <script>
+        // 添加触摸事件监听器
+        document.getElementById('tetris-canvas').addEventListener('touchstart', function(event) {
+            event.preventDefault();
+            const touch = event.touches[0];
+            const rect = canvas.getBoundingClientRect();
+            const x = touch.clientX - rect.left;
+            const y = touch.clientY - rect.top;
+
+            // 根据触摸位置判断旋转方向
+            if (x < canvas.width / 2) {
+                playerRotate(-1);
+            } else {
+                playerRotate(1);
+            }
+        });
+    </script>
 </body>
 </html>
