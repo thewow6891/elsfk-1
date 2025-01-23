@@ -22,14 +22,22 @@
             event.preventDefault();
             const touch = event.touches[0];
             const rect = canvas.getBoundingClientRect();
-            const x = touch.clientX - rect.left;
+            const startX = touch.clientX - rect.left;
 
-            // 根据触摸位置判断旋转方向
-            if (x < canvas.width / 2) {
-                playerRotate(-1);
-            } else {
-                playerRotate(1);
-            }
+            // 添加触摸结束事件监听器
+            document.getElementById('tetris-canvas').addEventListener('touchend', function(event) {
+                event.preventDefault();
+                const touch = event.changedTouches[0];
+                const rect = canvas.getBoundingClientRect();
+                const endX = touch.clientX - rect.left;
+
+                // 根据触摸位置判断移动方向
+                if (endX < startX - 50) { // 向左滑动
+                    playerMove(-1);
+                } else if (endX > startX + 50) { // 向右滑动
+                    playerMove(1);
+                }
+            }, { once: true });
         });
     </script>
 </body>
